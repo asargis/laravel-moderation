@@ -1,0 +1,42 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateModerationFieldsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('moderation_fields', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('moderation_id')->unsigned();
+            $table->string('name', 512);
+            $table->string('old')->nullable();
+            $table->text('new')->nullable();
+            $table->text('message')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected']);
+            $table->timestamps();
+
+            $table->foreign('moderation_id')
+                ->references('id')
+                ->on('moderations')
+                ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('moderation_fields');
+    }
+}

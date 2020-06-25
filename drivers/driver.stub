@@ -1,0 +1,34 @@
+<?php
+
+namespace DummyNamespace;
+
+use Barton\Moderation\Contracts\Moderation;
+use Barton\Moderation\Contracts\Moderatable;
+use Barton\Moderation\Contracts\ModerationDriver;
+
+class DummyClass implements ModerateDriver
+{
+    /**
+     * Perform an audit.
+     *
+     * @param \barton\Moderation\Contracts\Moderatable $model
+     *
+     * @return \barton\Moderation\Contracts\Moderation
+     */
+    public function moderate(Moderatable $model): Moderation
+    {
+        // TODO: Implement the audit logic
+    }
+
+    /**
+     * Remove older audits that go over the threshold.
+     *
+     * @param \barton\Moderation\Contracts\Moderatable $model
+     *
+     * @return bool
+     */
+    public function prune(Moderatable $model): bool
+    {
+        // TODO: Implement the pruning logic
+    }
+}
